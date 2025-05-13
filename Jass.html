@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЖАС ҒАЛЫМ НЕГІЗІНДЕГІ ЖЕЛ, КҮН, СУ: ЖАҢАРТЫЛАТЫН ЭНЕРГИЯҒА ҚАДАМ ЖОБАСЫ</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --text-color: #222;
+            --background-color: #f4f6f9;
+            --card-background: #fff;
+            --border-color: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Добавляем базовые анимации появления */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Анимация для заголовка */
+        @keyframes fadeInHeader {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInHeader 1s ease-out forwards;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin: 0 0 1rem;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin: 0;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.6s forwards;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background-color: var(--card-background);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.9s forwards;
+        }
+
+        /* Анимируем появление элементов содержимого */
+        .project-info, h2, h3, p, ul, ol, .week-content, .participants, .presentation-link, footer {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Устанавливаем задержку для плавного появления последовательно */
+        .project-info {
+            animation-delay: 1.2s;
+        }
+
+        h2 {
+            animation-delay: 1.5s;
+        }
+
+        h2 + p, h2 + ul {
+            animation-delay: 1.7s;
+        }
+
+        h3 {
+            animation-delay: 1.8s;
+        }
+
+        .week-content {
+            animation-delay: 2s;
+        }
+
+        .participants {
+            animation-delay: 2.2s;
+        }
+
+        .presentation-link {
+            animation-delay: 2.4s;
+        }
+
+        footer {
+            animation-delay: 2.6s;
+        }
+
+        h1, h2, h3, strong {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.625rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 1.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-left: 1.25rem;
+            margin-top: 0.625rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            animation-delay: calc(2s + var(--i, 0) * 0.1s);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2e76cc;
+            text-decoration: underline;
+        }
+
+        .project-info {
+            margin-bottom: 2rem;
+        }
+
+        .week-content {
+            background-color: #f9fbfd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .week-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .participants {
+            margin: 1.5rem 0;
+        }
+
+        .participants ol {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #888;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #2e76cc;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+
+        .presentation-link {
+            display: block;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        /* Добавляем подсветку при появлении некоторых элементов */
+        @keyframes highlightFadeIn {
+            0% {
+                background-color: var(--primary-color);
+                color: white;
+                opacity: 0;
+            }
+            20% {
+                background-color: var(--primary-color);
+                color: white;
+                opacity: 1;
+            }
+            100% {
+                background-color: transparent;
+                color: var(--text-color);
+                opacity: 1;
+            }
+        }
+
+        /* Анимация для элементов при скролле */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scroll-animate.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 992px) {
+            main {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 1.25rem;
+            }
+
+            main {
+                padding: 1.5rem;
+                margin: 1.5rem 0.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            h3 {
+                font-size: 1.125rem;
+            }
+
+            .participants ol {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.25rem;
+            }
+
+            header p {
+                font-size: 1.125rem;
+            }
+
+            main {
+                padding: 1.25rem;
+                margin: 1rem 0.5rem;
+                border-radius: 8px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                margin-top: 2rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .week-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>АНВАР ИСМАИЛОВ АТЫНДАҒЫ КӘСІПТІК КОЛЛЕДЖІ</h1>
+        <p>ЖАС ҒАЛЫМ НЕГІЗІНДЕГІ ЖЕЛ, КҮН, СУ: ЖАҢАРТЫЛАТЫН ЭНЕРГИЯҒА ҚАДАМ ЖОБАСЫ</p>
+    </div>
+</header>
+
+<main>
+    <div class="project-info">
+        <p><strong>ЖАУАПТЫ:</strong> Ирисметова Азиза Адилжановна</p>
+        <p><strong>АҚСУКЕНТ – 2025</strong></p>
+    </div>
+
+    <h2>Жобаның мақсаты:</h2>
+    <p>"Жас Ғалым" және "Жел, Күн, Су: Жаңартылатын Энергияға Қадам" жобаларының негізгі мақсаты - студенттердің ғылыми-зерттеу дағдыларын дамыту және жаңартылатын энергия көздерін зерттеу болып табылады. Бұл жобалар арқылы студенттер ғылыми зерттеулердің негізгі әдістерін меңгеріп, жел, күн және су энергиясын пайдалануды үйренеді.</p>
+    <p>Қазіргі таңда жаңартылатын энергия көздерінің маңыздылығы өсіп келеді. "Жел Күн Су" жобасы студенттерге осы салада практикалық дағдыларды қалыптастырып, болашақта энергетика саласында мамандануға мүмкіндік береді. Ал "Жас Ғалым" бағдарламасы студенттердің ғылыми ойлау қабілетін дамытып, зерттеу жүргізу дағдыларын қалыптастырады.</p>
+
+    <h2>Міндеттері:</h2>
+    <ul>
+        <li style="--i:0">Студенттердің ғылыми-зерттеу дағдыларын дамыту және ғылыми жобаларды жүзеге асыру.</li>
+        <li style="--i:1">Жаңартылатын энергия көздерінің жұмыс істеу принциптерін зерттеу.</li>
+        <li style="--i:2">Жел, күн және су энергиясын пайдаланудың әртүрлі әдістерін зерттеу.</li>
+        <li style="--i:3">Шағын жел генераторларын, күн панельдерін және су энергиясын өңдейтін құрылғыларды жасау.</li>
+        <li style="--i:4">Энергия үнемдеу технологияларын қолдану бойынша білім алу.</li>
+        <li style="--i:5">Экологиялық таза технологиялардың маңыздылығын түсіну.</li>
+    </ul>
+    <p>Жоғарыда көрсетілген міндеттер арқылы студенттер ғылыми ізденіс жасап, жаңартылатын энергия көздерін зерттеу барысында өз білімдерін кеңейтеді. Сонымен қатар, жоба барысында студенттер экологиялық таза технологиялардың маңыздылығын түсініп, энергия үнемдеу технологияларын қолдану жолдарын меңгереді.</p>
+
+    <h2>Күтілетін нәтижелер:</h2>
+    <ul>
+        <li style="--i:0">Студенттер ғылыми-зерттеу жұмыстарын жүргізу әдістерін меңгереді.</li>
+        <li style="--i:1">Жаңартылатын энергия көздерінің жұмыс істеу принциптерін түсінеді.</li>
+        <li style="--i:2">Шағын энергия өндіру құрылғыларын жасап, тестілей алады.</li>
+        <li style="--i:3">Энергияны тиімді пайдалану жолдарын үйренеді.</li>
+        <li style="--i:4">Ғылыми конференцияларға және жарыстарға қатысуға дайын болады.</li>
+    </ul>
+    <p>Жоба нәтижесінде студенттер теориялық білімдерін тәжірибеде қолдана алады және өздерінің жеке ғылыми жобаларын жасап, оларды нақты өмірде қолдану тәжірибесін алады. Сонымен қатар, жаңартылатын энергия көздерін пайдалану бойынша дағдылары жетіледі, бұл болашақта энергетика саласында мамандануға мүмкіндік береді.</p>
+
+    <h2>Қатысушылар:</h2>
+    <div class="participants">
+        <p><strong>Жоба жетекшісі:</strong> Ирисметова Азиза Адилжановна</p>
+        <ol>
+            <li style="--i:0">Имамакиров Есен</li>
+            <li style="--i:1">Мирхадиев Миродыл</li>
+            <li style="--i:2">Хасанов Абдусалих</li>
+            <li style="--i:3">Халматваев Элбек            </li>
+            <li style="--i:4">Шадиматова Дурдона
+            </li>
+            <li style="--i:5">Алиева Тахмина</li>
+            <li style="--i:6">Абдижалилов Исломбек
+            </li>
+            <li style="--i:6">Исматуллаева Лобар
+            </li>
+        </ol>
+    </div>
+
+    <h2>8 апталық бағдарлама:</h2>
+
+    <h3>1-Апта: Жас Ғалым - ғылыми-зерттеу жұмысының негіздері</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Ғылыми-зерттеу жұмысы дегеніміз не?</li>
+            <li style="--i:1">Зерттеу әдістері мен құралдарын таныстыру.</li>
+            <li style="--i:2">Ғылыми жоба тақырыбын таңдау және жоспарлау.</li>
+            <li style="--i:3">Тәжірибе: Зерттеу жоспарын құру және тақырып таңдау.</li>
+        </ul>
+        <p>Бұл аптада студенттер ғылыми-зерттеу жұмысының негіздерімен танысады. Олар зерттеу әдістерін зерттеп, өздерінің болашақ жобалары үшін тақырып таңдайды. Студенттерге зерттеу жоспарын құру және ғылыми әдебиеттерді қалай іздеу және талдау керектігі туралы білім беріледі.</p>
+    </div>
+
+    <h3>2-Апта: Жел Күн Су - жаңартылатын энергия көздеріне кіріспе</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Жаңартылатын энергия көздерінің түрлері мен маңыздылығы.</li>
+            <li style="--i:1">Жел, күн және су энергиясының негізгі принциптері.</li>
+            <li style="--i:2">Практикалық тапсырма: Шағын күн панелінің жұмысын зерттеу.</li>
+        </ul>
+        <p>Бұл аптада студенттер жаңартылатын энергия көздерімен танысады. Олар жел, күн және су энергиясының негізгі принциптерін зерттеп, осы энергия түрлерін пайдаланудың маңыздылығын түсінеді. Практикалық жұмыс барысында студенттер шағын күн панелінің жұмысын зерттейді.</p>
+    </div>
+
+    <h3>3-Апта: Жас Ғалым - ғылыми мәліметтерді жинау және талдау</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Ғылыми ақпарат көздері және оларды пайдалану.</li>
+            <li style="--i:1">Мәліметтерді жинау және өңдеу әдістері.</li>
+            <li style="--i:2">Тәжірибе: Таңдалған тақырып бойынша мәліметтер жинау.</li>
+        </ul>
+        <p>Студенттер ғылыми мәліметтерді жинау және талдау әдістерін үйренеді. Олар ғылыми ақпарат көздерін қалай пайдалану керектігін, мәліметтерді жинау және өңдеу әдістерін меңгереді. Практикалық жұмыс барысында таңдалған тақырып бойынша мәліметтер жинайды.</p>
+    </div>
+
+    <h3>4-Апта: Жел Күн Су - жел энергиясын зерттеу</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Жел энергиясын өндіру принциптері мен технологиялары.</li>
+            <li style="--i:1">Жел генераторларының құрылымы және жұмыс істеу принципі.</li>
+            <li style="--i:2">Практика: Шағын жел генераторын жасау және тестілеу.</li>
+        </ul>
+        <p>Студенттер жел энергиясын өндіру принциптері мен технологияларын зерттейді. Олар жел генераторларының құрылымы мен жұмыс істеу принципін меңгеріп, өздерінің шағын жел генераторын жасайды және тестілейді. Бұл жұмыс студенттерге жел энергиясының маңыздылығын түсінуге көмектеседі.</p>
+    </div>
+
+    <h3>5-Апта: Жас Ғалым - ғылыми жобаны жасау және презентациялау</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Ғылыми жобаның құрылымы мен форматы.</li>
+            <li style="--i:1">Ғылыми презентация жасау әдістері.</li>
+            <li style="--i:2">Практика: Өз жобаңызды презентациялау.</li>
+        </ul>
+        <p>Бұл аптада студенттер ғылыми жобаның құрылымы мен форматын үйренеді. Олар ғылыми презентация жасау әдістерімен танысып, өз жобаларын презентациялауға дайындалады. Студенттер өз жұмыстарын таныстырып, басқа студенттерден пікір алады.</p>
+    </div>
+
+    <h3>6-Апта: Жел Күн Су - күн энергиясын зерттеу</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Күн энергиясын пайдалану технологиялары.</li>
+            <li style="--i:1">Күн панельдерінің құрылымы және жұмыс істеу принципі.</li>
+            <li style="--i:2">Тәжірибе: Шағын күн панелін жасау және тестілеу.</li>
+        </ul>
+        <p>Студенттер күн энергиясын пайдалану технологияларын зерттейді. Олар күн панельдерінің құрылымы мен жұмыс істеу принципін меңгеріп, өздерінің шағын күн панелін жасайды және тестілейді. Бұл жұмыс студенттерге күн энергиясының маңыздылығын түсінуге көмектеседі.</p>
+    </div>
+
+    <h3>7-Апта: Жас Ғалым - ғылыми конференцияға дайындық</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Ғылыми конференцияларға қатысу ережелері.</li>
+            <li style="--i:1">Ғылыми жобаны қорғау дағдылары.</li>
+            <li style="--i:2">Практика: Жобаны қорғау әдістерін жетілдіру.</li>
+        </ul>
+        <p>Студенттер ғылыми конференцияларға қатысу ережелерімен танысады. Олар ғылыми жобаны қорғау дағдыларын меңгеріп, өз жобаларын қорғауға дайындалады. Бұл апта студенттерге ғылыми конференцияларға қатысуға дайындалуға көмектеседі.</p>
+    </div>
+
+    <h3>8-Апта: Жел Күн Су - су энергиясын зерттеу және қорытынды жоба</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Су энергиясын пайдалану технологиялары.</li>
+            <li style="--i:1">Шағын су электр станциясының жұмыс істеу принципі.</li>
+            <li style="--i:2">Финалдық жоба: "Жел Күн Су" энергиясын біріктірген кешенді жоба жасау.</li>
+        </ul>
+        <p>Жобаның соңғы аптасында студенттер су энергиясын пайдалану технологияларын зерттейді. Олар шағын су электр станциясының жұмыс істеу принципін меңгеріп, өздерінің жел, күн және су энергиясын біріктірген кешенді жобасын жасайды. Бұл апта барлық меңгерілген білімдерді біріктіріп, қорытынды жобаны жасауға арналған.</p>
+    </div>
+
+    <h2>Қорытынды:</h2>
+    <p>"Жас Ғалым" және "Жел Күн Су" жобалары студенттерге ғылыми-зерттеу жұмыстарын жүргізу дағдыларын дамытуға және жаңартылатын энергия көздерін зерттеуге мүмкіндік береді. Бұл жобалар студенттердің шығармашылық ойлауын, ғылыми зерттеу дағдыларын және жаңартылатын энергия көздерін пайдалану қабілеттерін дамытады.</p>
+
+    <p>Жаңартылатын энергия көздерін зерттеу қазіргі заманда аса маңызды роль атқарады. Студенттерге осы салада терең білім алу мен практикалық тәжірибе жинақтау маңызды. Жобаның барысында алынған дағдылар тек кәсіби өмірде ғана емес, қоғамның басқа да салаларында да қолданылуы мүмкін. Осылайша, ғылыми зерттеулерді жүргізе алатын және жаңартылатын энергия көздерін түсінетін жастардың болашақта қоғамда үлкен жетістіктерге жететініне сенімдіміз.</p>
+
+    <p>Қорыта айтқанда, "Жас Ғалым" және "Жел Күн Су" жобалары студенттерге тек техникалық дағдыларды емес, шығармашылық пен сын тұрғысынан ойлау қабілетін де дамытуға көмектеседі. Жоба барысында алынған білімдер болашақта ғылыми зерттеулерде, энергетика саласында, экологиялық таза технологияларды дамытуда және басқа да салаларда табысты қолданылуы мүмкін. Бұл жоба - тек білім алу ғана емес, сонымен қатар болашаққа бағытталған үлкен қадам болып табылады.</p>
+    
+    <div class="presentation-link">
+        <p>Презентацияға сілтеме:</p>
+        <a href="https://docs.google.com/presentation/d/1oAwcHwzBKrvenXMjuBjSDDhxuRy_nKE_/edit?usp=sharing&ouid=114618390034857902026&rtpof=true&sd=true" target="_blank" class="btn">Презентацияны көру</a>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        &copy; 2025 Анвар Исмаилов атындағы кәсіптік колледжі
+    </div>
+</footer>
+
+<script>
+    function checkScroll() {
+        const elements = document.querySelectorAll('.scroll-animate');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.classList.add('show');
+            }
+        });
+    }
+
+    window.addEventListener('load', checkScroll);
+    window.addEventListener('scroll', checkScroll);
+</script>
+
+</body>
+</html>

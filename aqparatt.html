@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЖИ Технологиялары Жобасы</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --text-color: #222;
+            --background-color: #f4f6f9;
+            --card-background: #fff;
+            --border-color: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Добавляем базовые анимации появления */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Анимация для заголовка */
+        @keyframes fadeInHeader {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInHeader 1s ease-out forwards;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin: 0 0 1rem;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin: 0;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.6s forwards;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background-color: var(--card-background);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.9s forwards;
+        }
+
+        /* Анимируем появление элементов содержимого */
+        .project-info, h2, h3, p, ul, ol, .week-content, .participants, .presentation-link, footer {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Устанавливаем задержку для плавного появления последовательно */
+        .project-info {
+            animation-delay: 1.2s;
+        }
+
+        h2 {
+            animation-delay: 1.5s;
+        }
+
+        h2 + p, h2 + ul {
+            animation-delay: 1.7s;
+        }
+
+        h3 {
+            animation-delay: 1.8s;
+        }
+
+        .week-content {
+            animation-delay: 2s;
+        }
+
+        .participants {
+            animation-delay: 2.2s;
+        }
+
+        .presentation-link {
+            animation-delay: 2.4s;
+        }
+
+        footer {
+            animation-delay: 2.6s;
+        }
+
+        h1, h2, h3, strong {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.625rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 1.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-left: 1.25rem;
+            margin-top: 0.625rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            animation-delay: calc(2s + var(--i, 0) * 0.1s);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2e76cc;
+            text-decoration: underline;
+        }
+
+        .project-info {
+            margin-bottom: 2rem;
+        }
+
+        .week-content {
+            background-color: #f9fbfd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .week-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .participants {
+            margin: 1.5rem 0;
+        }
+
+        .participants ol {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #888;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #2e76cc;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+
+        .presentation-link {
+            display: block;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        /* Добавляем подсветку при появлении некоторых элементов */
+        @keyframes highlightFadeIn {
+            0% {
+                background-color: var(--primary-color);
+                color: white;
+                opacity: 0;
+            }
+            20% {
+                background-color: var(--primary-color);
+                color: white;
+                opacity: 1;
+            }
+            100% {
+                background-color: transparent;
+                color: var(--text-color);
+                opacity: 1;
+            }
+        }
+
+        /* Анимация для элементов при скролле */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scroll-animate.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 992px) {
+            main {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 1.25rem;
+            }
+
+            main {
+                padding: 1.5rem;
+                margin: 1.5rem 0.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            h3 {
+                font-size: 1.125rem;
+            }
+
+            .participants ol {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.25rem;
+            }
+
+            header p {
+                font-size: 1.125rem;
+            }
+
+            main {
+                padding: 1.25rem;
+                margin: 1rem 0.5rem;
+                border-radius: 8px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                margin-top: 2rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .week-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>АНВАР ИСМАИЛОВ АТЫНДАҒЫ КӘСІПТІК КОЛЛЕДЖІ</h1>
+        <p>ЖИ ТЕХНОЛОГИЯЛАРЫ ЖОБАСЫ</p>
+    </div>
+</header>
+
+<main>
+    <div class="project-info">
+        <p><strong>ЖАУАПТЫ:</strong> Абдулазизов Акбар Абдукаххарович</p>
+        <p><strong>АҚСУКЕНТ – 2025</strong></p>
+    </div>
+
+    <h2>Жобаның мақсаты:</h2>
+    <p>Жасанды интеллект (ЖИ) технологиялары бойынша білім беру және қолдану дағдыларын дамыту. Бұл жоба арқылы студенттер ЖИ-дің негізгі қағидаларын, алгоритмдерін және оның шынайы өмірдегі қолдану салаларын меңгереді. Сонымен қатар, заманауи ЖИ құралдарын тәжірибеде қолдану дағдыларын жетілдіру, креативті ойлау қабілетін арттыру және жаңа технологияларды меңгеру.</p>
+    <p>Қазіргі таңда жасанды интеллект өмірдің көптеген салаларында кеңінен қолданылуда. ЖИ жүйелері автоматтандырылған шешім қабылдау, деректерді талдау, табиғи тілдерді өңдеу, бейнемазмұнды өңдеу, медициналық диагностика және қаржы саласындағы көптеген міндеттерді шешуге арналған. Бұл жоба студенттерге ЖИ құралдарын пайдалана отырып, әртүрлі тапсырмаларды орындауға мүмкіндік береді.</p>
+
+    <h2>Міндеттері:</h2>
+    <ul>Tеориялық негіздерін түсіну.</li>
+        <li style="--i:1">Түрлі салаларда ЖИ қолдану мүмкіндіктерін қарастыру.</li>
+        <li style="--i:2">ЖИ көмегімен нақты жобалар жасау және оларды тестілеу.</li>
+        <li style="--i:3">Колледж үшін шағын ЖИ-жүйе әзірлеу (мысалы, сұрақ-жауап боты).</li>
+        <li style="--i:4">ЖИ көмегімен мультимедиялық контент әзірлеу (анимация, бейнежазба, интерактивті материалдар).</li>
+        <li style="--i:5">ЖИ-мен байланысты этикалық және құқықтық мәселелерді қарастыру.</li>
+    </ul>
+    <p>Жоғарыда көрсетілген міндеттер арқылы студенттер ЖИ-дің әртүрлі аспектілерін меңгеріп, олардың салалық қолданылуын зерттей алады. Сонымен қатар, жоба барысында жасанды интеллекттің моральдық және этикалық мәселелеріне көңіл бөлінеді, мысалы, жеке мәліметтердің қауіпсіздігі мен деректерді қорғау.</p>
+
+    <h2>Күтілетін нәтижелер:</h2>
+    <ul>
+        <li style="--i:0">Студенттер ЖИ-дің негізгі қағидаларын меңгереді.</li>
+        <li style="--i:1">ЖИ-ды күнделікті өмірде және кәсіби салаларда қолдана алады.</li>
+        <li style="--i:2">Нақты ЖИ-жобаны жасап шығарады.</li>
+        <li style="--i:3">Болашақта ЖИ саласында мамандану мүмкіндігін алады.</li>
+        <li style="--i:4">Жасанды интеллект негізінде өз жобаларын дамытуға мүмкіндік алады.</li>
+    </ul>
+    <p>Жоба нәтижесінде студенттер теориялық білімдерін тәжірибеде қолдана алады және өздерінің жеке ЖИ жобаларын жасап, оларды нақты өмірде қолдану тәжірибесін алады. Сонымен қатар, жасанды интеллектті пайдалану бойынша дағдылары жетіледі, бұл болашақта ЖИ саласында мамандануға мүмкіндік береді.</p>
+
+    <h2>Қатысушылар:</h2>
+    <div class="participants">
+        <p><strong>Жоба жетекшісі:</strong> Абдулазизов Акбар Абдукаххарович</p>
+        <ol>
+            <li style="--i:0">Имамакиров Есен</li>
+            <li style="--i:1">Мирхадиев Миродил</li>
+            <li style="--i:2">Анартаев Асадбек</li>
+            <li style="--i:3">Нуралибеков Муратжан</li>
+            <li style="--i:4">Имамакиров Аман</li>
+            <li style="--i:5">Алиева Тахмина</li>
+            <li style="--i:6">Райимжанова Юлдуз</li>
+        </ol>
+    </div>
+
+    <h2>8 апталық бағдарлама:</h2>
+
+    <h3>1-Апта: QR код жасау және оқу әдістері</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">QR код дегеніміз не?</li>
+            <li style="--i:1">Оны қалай жасауға және пайдалану жолдары.</li>
+            <li style="--i:2">Әртүрлі бағдарламалармен QR кодтарды оқу және шифрлау.</li>
+            <li style="--i:3">Тәжірибе: Жеке QR код жасау және оны қолдану.</li>
+        </ul>
+        <p>Бұл аптада студенттер QR кодтардың негізі мен олардың қолданылуын үйренеді. QR кодтар әсіресе маркетингте, білім беруде және денсаулық сақтау саласында кеңінен қолданылуда. Оларды жасау мен оқу әдістері де ЖИ тұрғысынан маңызды дағды болып табылады.</p>
+    </div>
+
+    <h3>2-Апта: Суретті сөйлету</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">ЖИ көмегімен статикалық суреттерді сөйлету технологиялары.</li>
+            <li style="--i:1">Deepfake және басқа алгоритмдер.</li>
+            <li style="--i:2">Практикалық тапсырма: Студенттер өздерінің суреттерін анимациялап, қысқа сөйлейтін бейне жасайды.</li>
+        </ul>
+        <p>Бұл аптада студенттер ЖИ көмегімен суреттерді сөйлетудің алуан түрлі тәсілдерін үйренеді. Deepfake технологиясы мен басқа да құралдарды пайдалана отырып, олар өздеріне бейнероликтер жасайды. Бұл жұмыс барысында суреттердің визуалды ерекшеліктерін қалыптастыруға үйренеді.</p>
+    </div>
+
+    <h3>3-Апта: Анимация жасау</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">ЖИ көмегімен анимациялық бейнелер құру.</li>
+            <li style="--i:1">Түрлі бағдарламалармен жұмыс істеу.</li>
+            <li style="--i:2">Тәжірибе: Қарапайым GIF-анимация құру.</li>
+        </ul>
+        <p>Анимация жасау үшін ЖИ құралдарын қолдану студенттерге шығармашылық қабілеттерін дамытуға мүмкіндік береді. Бұл аптада олар анимациялық бейнелерді жасауға үйренеді, сонымен қатар анимацияның негізгі принциптерін игереді.</p>
+    </div>
+
+    <h3>4-Апта: Gamma, ChatGPT, VEED.IO және басқа құралдармен жұмыс жасау</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">ЖИ-ді контент жасау және бейне өңдеуге қолдану.</li>
+            <li style="--i:1">VEED.IO және Gamma көмегімен презентация мен видео монтаждау.</li>
+            <li style="--i:2">Практика: Берілген тақырыпқа бейнеролик жасау.</li>
+        </ul>
+        <p>Студенттер бұл аптада контент жасау және бейне өңдеудің заманауи құралдарымен танысады. VEED.IO мен Gamma арқылы олар өздерінің презентацияларын және бейнероликтерін жасайды. Бұл дағды кәсіби әлемде өте маңызды болып табылады.</p>
+    </div>
+
+    <h3>5-Апта: ЖИ арқылы бейне ролик жасау</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Жасанды интеллект көмегімен бейнеролик жасау.</li>
+            <li style="--i:1">Түрлі ЖИ құралдарын пайдалану.</li>
+            <li style="--i:2">Практика: Қысқа видеоны автоматты түрде жасау.</li>
+        </ul>
+        <p>Бұл аптада студенттер ЖИ көмегімен бейнеролик жасауға үйренеді. Олар түрлі алгоритмдер мен құралдарды қолдана отырып, бейнемазмұнды автоматты түрде жасайды.</p>
+    </div>
+
+    <h3>6-Апта: ЖИ құралдарын тестілеу және қолдану</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Заманауи ЖИ платформаларын зерттеу.</li>
+            <li style="--i:1">Студенттер өздерінің шағын жобаларын жасап көреді.</li>
+            <li style="--i:2">Тәжірибе: Әр студент өз жобасын жасап, оны топ ішінде тестілеу.</li>
+        </ul>
+        <p>Бұл аптада студенттер ЖИ құралдарын қолдану арқылы өз жобаларын жасайды. Олар шағын тестілеу жұмыстары мен эксперименттер жүргізіп, ЖИ алгоритмдерін бағалайды.</p>
+    </div>
+
+    <h3>7-Апта: ЖИ-ді нақты мәселелерге қолдану</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Жасанды интеллект көмегімен шешілетін шынайы өмірлік мәселелер.</li>
+            <li style="--i:1">Практика: ЖИ негізінде автоматтандырылған сұрақ-жауап жүйесін құру.</li>
+        </ul>
+        <p>Студенттер шынайы әлемдегі мәселелерді шешу үшін ЖИ пайдалану дағдыларын алады. Олар автоматтандырылған сұрақ-жауап жүйесін құрып, қолдануды үйренеді.</p>
+    </div>
+
+    <h3>8-Апта: Финалдық жоба – ЖИ негізіндегі қосымша жасау</h3>
+    <div class="week-content scroll-animate">
+        <ul>
+            <li style="--i:0">Барлық алынған білімді қолдану.</li>
+            <li style="--i:1">Толыққанды ЖИ-қосымша жасау және оны тестілеу.</li>
+            <li style="--i:2">Студенттер өз жобаларын қорғап, өзара бағалайды.</li>
+        </ul>
+        <p>Жоба соңында студенттер өздерінің соңғы жобаларын жасап, оларды қорғап, бағалайды. Бұл жоба олардың барлық білімдерін біріктіріп, практикалық дағдыларын көрсетуге мүмкіндік береді.</p>
+    </div>
+
+    <h2>Қорытынды:</h2>
+    <p>Жасанды интеллект технологияларын оқу студенттер үшін болашақтағы үлкен мүмкіндіктерге жол ашады. Бұл жоба арқылы студенттер тек теориялық біліммен ғана шектелмей, өздеріне қажетті практикалық дағдыларды да меңгерді. ЖИ құралдарының арқасында олар әртүрлі тапсырмаларды тиімді шешуге қабілетті болады. Бұл жұмыс олардың шығармашылық ойлауын дамытып, жаңа шешімдер ұсынуға мүмкіндік береді.</p>
+
+    <p>ЖИ білімдері қазіргі заманғы кәсіптік салада аса маңызды рөл атқарады. Студенттерге осы салада терең білім алу мен практикалық тәжірибе жинақтау маңызды. Жобаның барысында алынған дағдылар тек кәсіби өмірде ғана емес, қоғамның басқа да салаларында да қолданылуы мүмкін. Осылайша, жасанды интеллектті терең түсінген және қолдана алған жастардың болашақта қоғамда үлкен жетістіктерге жететініне сенімдіміз.</p>
+
+    <p>Қорыта айтқанда, ЖИ технологияларымен танысу студенттерге тек техникалық дағдыларды емес, шығармашылық пен сын тұрғысынан ойлау қабілетін де дамытуға көмектеседі. Жоба барысында алынған білімдер болашақта ғылыми зерттеулерде, бизнес жобаларында, білім беру саласында және басқа да салаларда табысты қолданылуы мүмкін. Бұл жоба - тек білім алу ғана емес, сонымен қатар болашаққа бағытталған үлкен қадам болып табылады.</p>
+    
+    <div class="presentation-link">
+        <p>Презентацияға сілтеме:</p>
+        <a href="https://docs.google.com/presentation/d/193jZ6P3HMlIdaa1tlQKRrrIerdhs5XK3/edit?usp=sharing&ouid=106945426565910196793&rtpof=true&sd=true" target="_blank" class="btn">Презентацияны көру</a>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        &copy; 2025 Анвар Исмаилов атындағы кәсіптік колледжі
+    </div>
+</footer>
+
+<script>
+    function checkScroll() {
+        const elements = document.querySelectorAll('.scroll-animate');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.classList.add('show');
+            }
+        });
+    }
+
+    window.addEventListener('load', checkScroll);
+    window.addEventListener('scroll', checkScroll);
+</script>
+
+</body>
+</html>
